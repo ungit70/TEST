@@ -81,10 +81,13 @@ class estructura(object):
     def subcatEvaluar(self, titulo):
         # determina si la pelicula existe dentro de una
         # categoria
+        estructuraPelicula = None
         for idPelicula, elementos in self.catalogo.items():
             if titulo == elementos.get('title'):
                 estructuraPelicula = elementos.get('categorias')
                 break
+        if not estructuraPelicula:
+            return f'La pelicula {titulo} no esta en el catalogo'
         return estructuraPelicula
 
 

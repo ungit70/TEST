@@ -64,7 +64,6 @@ class recomendador(estructura):
         try:
             # ajuste cuando la pelicula se suguiere a si misma
             resultado.index(titulo)
-            print('entro')
             resultado[resultado.index(
                 titulo)] = random.choice(self.recomendacion_simple(titulo))
         except:
