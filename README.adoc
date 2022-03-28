@@ -33,4 +33,8 @@ El sistema de recomendación no tiene una sección para evaluar sus resultados y
 * recomendador.py: contiene la implementacion del objeto recomendador, el cual hereda la infraestructura del archivo **estructura.py**. 
 
 * ejecutorTest.ipynb: instancia el objeto recomendador, envía datos y recibe las sugerencias del recomendador
- 
+
+
+## Referencia: 
+
+* Koeneman, S. H., & Cavanaugh, J. E. (2022). An improved asymptotic test for the Jaccard similarity index for binary data. Statistics & Probability Letters, 184, 109375.
