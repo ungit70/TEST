@@ -7,7 +7,8 @@ import csv
 
 class estructura(object):
     def videoteca(self): 
-        # seccion peliculas
+        # crea los distintos catalogos
+        # relacionados con las peliculas
         with open(self.rutaCatalogo, 'r') as vidioteca:
             vidioteca = csv.reader(vidioteca, delimiter=',')
             for pelicula in vidioteca:
@@ -40,8 +41,7 @@ class estructura(object):
                     self.catalogo[idPelicula] = {'title': titulo,
                                                 'categorias': [self.directSubgenero.get(subg) 
                                                 for subg in generoPelicula]}
-                    # linea para dar numeros
-                    #'categorias': [self.directSubgenero.get(subg) for subg in generoPelicula]}
+
                 except:
                     traceback.print_exc(file=sys.stdout)
                     print(f'Ocurrio un problema estructurando: {pelicula}')
@@ -49,7 +49,8 @@ class estructura(object):
 
 
     def subscriptores(self):
-        #seccion usuario
+        # crea la lista de usuarios 
+        # y el historial de reproduccion
         with open(self.rutaUsers, 'r') as usuarios:
             usuarios = csv.reader(usuarios, delimiter=',')
             for tag in usuarios:
@@ -78,6 +79,8 @@ class estructura(object):
 
 
     def subcatEvaluar(self, titulo):
+        # determina si la pelicula existe dentro de una
+        # categoria
         for idPelicula, elementos in self.catalogo.items():
             if titulo == elementos.get('title'):
                 estructuraPelicula = elementos.get('categorias')
@@ -86,6 +89,8 @@ class estructura(object):
 
 
     def local_jaccard(self, set1, set2):
+        # dados dos conjuntos retorna la
+        # similitud de estos
         set1 = set(set1)
         set2 = set(set2)
         inter = len(set1.intersection(set2))

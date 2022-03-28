@@ -22,14 +22,9 @@ class recomendador(estructura):
                         for i in self.catalogo.items()]
 
 
-
-    # recomendacion simple: de todo los generenos que
-    # el usuario ha visto se toma la subcategoria de mayor
-    # frecuencia y se toma una pelicula al azar del genero
-    # se revisa si ya la vio, en ese caso se toma
-    # otra hasta que se sugiere una que no ha vist
-
     def recomendacion_simple(self, titulo: str) -> dict:
+        # data una pelicula, regresa la sugerencia 
+        # de otras tres peliculas del mismo genero 
         if titulo in self.totalPeliculas:
             for genero, peliculas in self.generos.items():
                 if titulo in peliculas:
@@ -40,6 +35,9 @@ class recomendador(estructura):
 
 
     def recomendacion_jaccard(self, titulo):
+        # data una pelicula, regresa las tres peliculas
+        # mas similares a esta de acuerdo a los subgeneros
+        # de la pelicula dada
         recomendaciones = {}
         estructuraPelicula = self.subcatEvaluar(titulo)
         for pelicula in self.pivoteReco:
@@ -60,9 +58,11 @@ class recomendador(estructura):
 
         resultado = list(recomendaciones.values())
 
+        # convertir id de pelicula a titulo
         for num, idPelicula in enumerate(resultado):
             resultado[num] = self.catalogo[idPelicula].get('title')
         try:
+            # ajuste cuando la pelicula se suguiere a si misma
             resultado.index(titulo)
             print('entro')
             resultado[resultado.index(
@@ -71,7 +71,10 @@ class recomendador(estructura):
             pass
         return resultado
 
+
     def recomendaciones(self, entrada):
+        # imprime la lista de recomendaciones dada
+        # una pelicula o lista de estas
         if isinstance(entrada,list):
             for pelicula in entrada:
                 listaJaccard = self.recomendacion_jaccard(pelicula)

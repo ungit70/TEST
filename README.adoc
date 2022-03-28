@@ -1,0 +1,36 @@
+# Test Arquitecto Ciencia de Datos
+
+* Instrucciones: A partir de los conjuntos de datos adjuntos, genere un sistema de recomendación de películas basado en similitudes, es decir, si un usuario vio la película A, entonces se recomienda ver las películas B,C y D por su similitud.
+* Entregable: Código desarrollado en Python. Debe incluir la función que recibe el título de la película y que regrese sus similares.
+
+## Implementación
+
+Se tomó como conjunto de trabajo el archivo **movies.csv**. De este, se extrae el id de la película, su título y los subgéneros. Con estos datos se construye un catálogo global, un índice de subgénero y un listado de películas por género. Para este último caso, las películas están contenidas en cada subcategoría indicada, por ello, a nivel de estructura están, cuando menos, duplicadas.
+
+Para las recomendaciones, se crearon dos funciones, una aleatoria, denominada simple. Y otra basada en similitud de Jaccard para intersección de conjuntos.
+
+1. Recomendación simple: dada una película, se toma el primer género que la contiene y son seleccionadas tres películas al azar que estén en el mismo género. 
+
+2. Recomendación Jaccard: dado un título de película, del catálogo global se obtienen los subgéneros que la describen, luego, estos se comparan con los subgéneros de todas la peliculas del catálogo y se retornan los elementos más similares en términos de los elementos de los conjuntos.
+
+image::.//jaccard.jpg[align="center"]
+
+Para este caso, la similitud se calcula con los subgéneros que describen la película. Se tomó este conjunto de datos para evitar el sesgo causado por la clasificación de los usuarios. 
+
+El recomendador está desarrollado con la premisa: **las películas conducen, el usuario disfruta del viaje**. 
+
+A pesar de no utilizar los datos de los usuarios para crear las recomendaciones, se crean dos objetos que guardan el total de usuarios registrados, y el historial de visualización de cada suscriptor. 
+
+## Alcance
+
+El sistema de recomendación no tiene una sección para evaluar sus resultados y está acotado al conjunto de películas del archivo **movies.csv**. Sin embargo, de manera empírica, para algunas pruebas del recomendador, no ocurre que se de una película con subgeneros accion, ciencia ficcion y terror, y el la sugerencia sea una película compuesta por las categorías animada, infantil y de fantasía.  
+
+
+## Descripción de archivos
+
+* estructura.py: contiene las funciones que crean los catálogos y listados relevantes para el cálculo de similitudes. Además, contiene la implementación de la función de similitud Jaccard. 
+
+* recomendador.py: contiene la implementacion del objeto recomendador, el cual hereda la infraestructura del archivo **estructura.py**. 
+
+* ejecutorTest.ipynb: instancia el objeto recomendador, envía datos y recibe las sugerencias del recomendador
+ 
